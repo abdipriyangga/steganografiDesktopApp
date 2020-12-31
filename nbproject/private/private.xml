@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/mabdipme/NetBeansProjects/finalProject/src/entity/ImageData.java</file>
+            <file>file:/home/mabdipme/NetBeansProjects/finalProject/src/entity/TextData.java</file>
+            <file>file:/home/mabdipme/NetBeansProjects/finalProject/src/controllers/RLSB.java</file>
+            <file>file:/home/mabdipme/NetBeansProjects/finalProject/src/controllers/Encoder.java</file>
+            <file>file:/home/mabdipme/NetBeansProjects/finalProject/src/controllers/LSB.java</file>
+            <file>file:/home/mabdipme/NetBeansProjects/finalProject/src/boundary/formMain.java</file>
+            <file>file:/home/mabdipme/NetBeansProjects/finalProject/src/controllers/Decoder.java</file>
+            <file>file:/home/mabdipme/NetBeansProjects/finalProject/src/boundary/formEncode.java</file>
+            <file>file:/home/mabdipme/NetBeansProjects/finalProject/src/controllers/IoManager.java</file>
+            <file>file:/home/mabdipme/NetBeansProjects/finalProject/src/controllers/Aes.java</file>
+            <file>file:/home/mabdipme/NetBeansProjects/finalProject/src/controllers/PsnrManager.java</file>
+        </group>
+    </open-files>
+</project-private>
