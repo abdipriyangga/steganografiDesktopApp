@@ -27,12 +27,9 @@ public class Encoder {
     private String[][] SR;
     private String[][] SG;
     private String[][] SB;
-    private String[][] pixelRSAR;
-    private String[][] pixelRSAG;
-    private String[][] pixelRSAB;
-    private String[][] pixelRSACRTR;
-    private String[][] pixelRSACRTG;
-    private String[][] pixelRSACRTB;
+    private String[][] pixelAESR;
+    private String[][] pixelAESG;
+    private String[][] pixelAESB;
     private int[][] R_aksen;
     private int[][] G_aksen;
     private int[][] B_aksen;
@@ -120,12 +117,9 @@ public class Encoder {
         SG = new String [width][height];
         SB = new String [width][height];
         
-       pixelRSAR=new String[width][height];
-       pixelRSAG=new String[width][height];
-       pixelRSAB=new String[width][height];
-       pixelRSACRTR=new String[width][height];
-       pixelRSACRTG=new String[width][height];
-       pixelRSACRTB=new String[width][height];
+       pixelAESR=new String[width][height];
+       pixelAESG=new String[width][height];
+       pixelAESB=new String[width][height];
         for (i = 0; i<(width); i++) {
             for (j = 0; j < (height) ; j++) {
 
@@ -147,13 +141,9 @@ public class Encoder {
                         while(SB[i][j].length() !=8){
                             SB[i][j] = "0"+SB[i][j];
                         }
-                        pixelRSAR[i][j]=SR[i][j];
-                        pixelRSAG[i][j]=SG[i][j];
-                        pixelRSAB[i][j]=SB[i][j];
-                        pixelRSACRTR[i][j]=SR[i][j];
-                        pixelRSACRTG[i][j]=SG[i][j];
-                        pixelRSACRTB[i][j]=SB[i][j];
-                        
+                        pixelAESR[i][j]=SR[i][j];
+                        pixelAESG[i][j]=SG[i][j];
+                        pixelAESB[i][j]=SB[i][j];
                 }
         }
        int ulang=0;
@@ -193,7 +183,7 @@ public class Encoder {
                if(an>=panjangcipherRSA){
                    break;
                }
-               pixelRSAR[i][j]= pixelRSAR[i][j].substring(0, index[indexer]) + cbinCipherRSA[an] + pixelRSAR[i][j].substring(index[indexer]+1);
+               pixelAESR[i][j]= pixelAESR[i][j].substring(0, index[indexer]) + cbinCipherRSA[an] + pixelAESR[i][j].substring(index[indexer]+1);
                an++;
                
                
@@ -201,14 +191,14 @@ public class Encoder {
                 if(an>=panjangcipherRSA){
                    break;
                }
-               pixelRSAG[i][j]= pixelRSAG[i][j].substring(0, index[indexer]) + cbinCipherRSA[an] + pixelRSAG[i][j].substring(index[indexer]+1);
+               pixelAESG[i][j]= pixelAESG[i][j].substring(0, index[indexer]) + cbinCipherRSA[an] + pixelAESG[i][j].substring(index[indexer]+1);
                an++;
                
                 //System.out.println("i = "+i+" J="+j+" AN = "+an);
                if(an>=panjangcipherRSA){
                    break;
                }
-                pixelRSAB[i][j]= pixelRSAB[i][j].substring(0, index[indexer]) + cbinCipherRSA[an] + pixelRSAB[i][j].substring(index[indexer]+1);
+                pixelAESB[i][j]= pixelAESB[i][j].substring(0, index[indexer]) + cbinCipherRSA[an] + pixelAESB[i][j].substring(index[indexer]+1);
                an++;
                
                 //System.out.println("i = "+i+" J="+j+" AN = "+an);
@@ -220,44 +210,44 @@ public class Encoder {
         }  
         }         
         indexer=1;
-        for(an=0;an<panjangcipherRSACRT;an++){
-          for(i=0;i<width;i++){
-            for(j=0;j<height;j++){
-                
-               if(an>=panjangcipherRSACRT){
-                   break;
-               }
-               pixelRSACRTR[i][j]= pixelRSACRTR[i][j].substring(0, index[indexer]) + cbinCipherRSACRT[an] + pixelRSACRTR[i][j].substring(index[indexer]+1);
-               an++;
-               
-               
-                //System.out.println("i = "+i+" J="+j+" AN = "+an);
-                if(an>=panjangcipherRSA){
-                   break;
-               }
-               pixelRSACRTG[i][j]= pixelRSACRTG[i][j].substring(0, index[indexer]) + cbinCipherRSACRT[an] + pixelRSACRTG[i][j].substring(index[indexer]+1);
-               an++;
-               
-                //System.out.println("i = "+i+" J="+j+" AN = "+an);
-               if(an>=panjangcipherRSA){
-                   break;
-               }
-                pixelRSACRTB[i][j]= pixelRSACRTB[i][j].substring(0, index[indexer]) + cbinCipherRSACRT[an] + pixelRSACRTB[i][j].substring(index[indexer]+1);
-               an++;
-               
-                //System.out.println("i = "+i+" J="+j+" AN = "+an);
-                indexer++;
-            }
-            if(an>=panjangcipherRSACRT){
-                   break;
-               }
-        }  
-        }         
-        
+//        for(an=0;an<panjangcipherRSACRT;an++){
+//          for(i=0;i<width;i++){
+//            for(j=0;j<height;j++){
+//                
+//               if(an>=panjangcipherRSACRT){
+//                   break;
+//               }
+//               pixelRSACRTR[i][j]= pixelRSACRTR[i][j].substring(0, index[indexer]) + cbinCipherRSACRT[an] + pixelRSACRTR[i][j].substring(index[indexer]+1);
+//               an++;
+//               
+//               
+//                //System.out.println("i = "+i+" J="+j+" AN = "+an);
+//                if(an>=panjangcipherRSA){
+//                   break;
+//               }
+//               pixelRSACRTG[i][j]= pixelRSACRTG[i][j].substring(0, index[indexer]) + cbinCipherRSACRT[an] + pixelRSACRTG[i][j].substring(index[indexer]+1);
+//               an++;
+//               
+//                //System.out.println("i = "+i+" J="+j+" AN = "+an);
+//               if(an>=panjangcipherRSA){
+//                   break;
+//               }
+//                pixelRSACRTB[i][j]= pixelRSACRTB[i][j].substring(0, index[indexer]) + cbinCipherRSACRT[an] + pixelRSACRTB[i][j].substring(index[indexer]+1);
+//               an++;
+//               
+//                //System.out.println("i = "+i+" J="+j+" AN = "+an);
+//                indexer++;
+//            }
+//            if(an>=panjangcipherRSACRT){
+//                   break;
+//               }
+//        }  
+//        }         
+//        
         //System.out.println("==============================");
         for (i = 0; i<(width); i++) {
             for (j = 0; j < (height) ; j++) {
-                        col = ((Integer.parseInt(pixelRSAR[i][j],2)) << 16) | ((Integer.parseInt(pixelRSAG[i][j],2)) << 8)|  ((Integer.parseInt(pixelRSAB[i][j],2)));
+                        col = ((Integer.parseInt(pixelAESR[i][j],2)) << 16) | ((Integer.parseInt(pixelAESG[i][j],2)) << 8)|  ((Integer.parseInt(pixelAESB[i][j],2)));
                         stego_image.setRGB(i,j , col);
                         
 //                        System.out.println("R2:["+i+"]["+j+"]"+pixelRSAR[i][j]);
@@ -269,17 +259,17 @@ public class Encoder {
         
         
         //System.out.println("==============================");
-        for (int a = 0; a<(width); a++) {
-            for (int b = 0; b < (height) ; b++) {
-                        colCRT = ((Integer.parseInt(pixelRSACRTR[a][b],2)) << 16) | ((Integer.parseInt(pixelRSACRTG[a][b],2)) << 8)|  ((Integer.parseInt(pixelRSACRTB[a][b],2)));
-                        stego_imageCRT.setRGB(a,b , colCRT);
+//        for (int a = 0; a<(width); a++) {
+//            for (int b = 0; b < (height) ; b++) {
+//                        colCRT = ((Integer.parseInt(pixelRSACRTR[a][b],2)) << 16) | ((Integer.parseInt(pixelRSACRTG[a][b],2)) << 8)|  ((Integer.parseInt(pixelRSACRTB[a][b],2)));
+//                        stego_imageCRT.setRGB(a,b , colCRT);
                         
 //                        System.out.println("R2:["+a+"]["+b+"]"+pixelRSACRTR[a][b]);
 //                        System.out.println("G2:["+a+"]["+b+"]"+pixelRSACRTG[a][b]);
 //                        System.out.println("B2:["+a+"]["+b+"]"+pixelRSACRTB[a][b]);
-                          
-                }
-        }
+//                          
+//                }
+//        }
         
         
     }
