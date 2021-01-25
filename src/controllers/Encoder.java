@@ -30,6 +30,9 @@ public class Encoder {
     private String[][] pixelAESR;
     private String[][] pixelAESG;
     private String[][] pixelAESB;
+    private String[][] pixelRlsbR;
+    private String[][] pixelRlsbG;
+    private String[][] pixelRlsbB;
     private int[][] R_aksen;
     private int[][] G_aksen;
     private int[][] B_aksen;
@@ -54,8 +57,9 @@ public class Encoder {
     double time_encoding;
     char[] cbinCipherRSA;
     char[] cbinCipherRSACRT;
+    char[] binPanjangPesanAsli;
     int[] index;
-    int panjangcipherRSA,panjangcipherRSACRT;
+    int panjangcipherRSA,panjangcipherRSACRT, panjangPesanAsli;
     public void setCoverImage(BufferedImage cover_image){
         this.cover_image = cover_image;
     }
@@ -66,6 +70,10 @@ public class Encoder {
     
     public void setKValue(int k){
         this.k = k;
+    }
+    
+    public void setBinPesanAsli(char[] binPanjangPesanAsli) {
+        this.binPanjangPesanAsli = binPanjangPesanAsli;
     }
     
     public void setcipherRSA(char[] cbinCipherRSA){
@@ -79,13 +87,15 @@ public class Encoder {
         this.type = type;
     }
     
-    private BufferedImage cloneImage(BufferedImage cover_image){
+    public BufferedImage cloneImage(BufferedImage cover_image){
         this.cover_image = cover_image;
         ColorModel cm = cover_image.getColorModel();
         WritableRaster raster = cover_image.copyData(null);
         return new BufferedImage(cm, raster, cm.isAlphaPremultiplied(), null);
     }
-    
+    public void setPanjangPesanAsli(int panjangBinPesanAsli) {
+        this.panjangPesanAsli = panjangBinPesanAsli;
+    }
     public void setpanjangRSA(int panjangcRSA){
         this.panjangcipherRSA = panjangcRSA;
     }
@@ -98,11 +108,108 @@ public class Encoder {
     public int getPanjangcRSACRT(){
         return this.panjangcipherRSACRT;
     }
-    public void encode(int panjangcRSA,int panjangcRSACRT,int[] x){
-        setpanjangRSA(panjangcRSA);
-        setpanjangRSACRT(panjangcRSACRT);
+    public int getPanjangPesanAsli(){
+        return this.panjangPesanAsli;
+    }
+    public void encodeRlsb(int panjangBinPesanAsli, int[] x) {
+        setPanjangPesanAsli(panjangBinPesanAsli);
         stego_image = cloneImage(cover_image);
-        stego_imageCRT = cloneImage(cover_image);
+        width = stego_image.getWidth();
+        height = stego_image.getHeight();
+        R = new int [width][height];
+        G = new int [width][height];
+        B = new int [width][height];
+        
+        SR = new String [width][height];
+        SG = new String [width][height];
+        SB = new String [width][height];
+        
+        pixelRlsbR=new String[width][height];
+        pixelRlsbG=new String[width][height];
+        pixelRlsbB=new String[width][height];
+        for (i = 0; i < (width); i++) {
+            for (j = 0; j < (height) ; j++) {
+               Color c = new Color(stego_image.getRGB(i,j));
+               //System.out.println("RGB I="+i+" J="+j+"=" +stego_image.getRGB(i, j));
+               R[i][j] = c.getRed();
+               SR[i][j] = Integer.toBinaryString(R[i][j]);
+               while(SR[i][j].length() !=8){ 
+                SR[i][j] = "0"+SR[i][j];
+               }
+                        
+               G[i][j] = c.getGreen();
+               SG[i][j] = Integer.toBinaryString(G[i][j]);
+               while(SG[i][j].length() !=8){
+                SG[i][j] = "0"+SG[i][j];
+               }
+               B[i][j] = c.getBlue();
+               SB[i][j] = Integer.toBinaryString(B[i][j]);
+               while(SB[i][j].length() !=8){
+                SB[i][j] = "0"+SB[i][j];
+               }
+            }
+        }
+       int ulang=0;
+       int panjangx = x.length;
+     
+       index = new int[panjangx];
+       for(i = 0;i<panjangx;i++){
+           if(x[i]==1){
+              index[i] = 7;
+           }
+           else if(x[i]==2){
+              index[i] = 6;
+           }
+        }
+       
+        int indexer = 1;
+        //MENGUBAH
+        for(an=0;an < panjangPesanAsli;an++){
+          for(i=0;i < width;i++){
+            for(j=0;j < height;j++){
+                
+               if(an >= panjangPesanAsli){
+                   break;
+               }
+               pixelRlsbR[i][j]= pixelRlsbR[i][j].substring(0, index[indexer]) + binPanjangPesanAsli[an] + pixelRlsbR[i][j].substring(index[indexer]+1);
+               an++;
+               
+               
+                //System.out.println("i = "+i+" J="+j+" AN = "+an);
+                if(an>=panjangPesanAsli){
+                   break;
+               }
+               pixelRlsbG[i][j]= pixelRlsbG[i][j].substring(0, index[indexer]) + binPanjangPesanAsli[an] + pixelRlsbG[i][j].substring(index[indexer]+1);
+               an++;
+               
+                //System.out.println("i = "+i+" J="+j+" AN = "+an);
+               if(an>=panjangPesanAsli){
+                   break;
+               }
+                pixelRlsbB[i][j]= pixelRlsbB[i][j].substring(0, index[indexer]) + binPanjangPesanAsli[an] + pixelRlsbB[i][j].substring(index[indexer]+1);
+               an++;
+               
+                //System.out.println("i = "+i+" J="+j+" AN = "+an);
+                indexer++;
+            }
+            if(an>=panjangPesanAsli){
+                   break;
+            }
+        }  
+        }         
+        indexer=1;
+        for (i = 0; i<(width); i++) {
+            for (j = 0; j < (height) ; j++) {
+                col = ((Integer.parseInt(pixelRlsbR[i][j],2)) << 16) | ((Integer.parseInt(pixelRlsbG[i][j],2)) << 8)|  ((Integer.parseInt(pixelRlsbB[i][j],2)));
+                stego_image.setRGB(i,j , col);         
+            }
+        }
+     }
+    public void encode(int panjangcRSA,int panjangcRSACRT,int[] x){
+//        setpanjangRSA(panjangcRSA);
+//        setpanjangRSACRT(panjangcRSACRT);
+        stego_image = cloneImage(cover_image);
+//        stego_imageCRT = cloneImage(cover_image);
         width = stego_image.getWidth();
         height = stego_image.getHeight();
         
@@ -117,9 +224,9 @@ public class Encoder {
         SG = new String [width][height];
         SB = new String [width][height];
         
-       pixelAESR=new String[width][height];
-       pixelAESG=new String[width][height];
-       pixelAESB=new String[width][height];
+//       pixelAESR=new String[width][height];
+//       pixelAESG=new String[width][height];
+//       pixelAESB=new String[width][height];
         for (i = 0; i<(width); i++) {
             for (j = 0; j < (height) ; j++) {
 
@@ -141,35 +248,22 @@ public class Encoder {
                         while(SB[i][j].length() !=8){
                             SB[i][j] = "0"+SB[i][j];
                         }
-                        pixelAESR[i][j]=SR[i][j];
-                        pixelAESG[i][j]=SG[i][j];
-                        pixelAESB[i][j]=SB[i][j];
-                }
+//                        pixelAESR[i][j]=SR[i][j];
+//                        pixelAESG[i][j]=SG[i][j];
+//                        pixelAESB[i][j]=SB[i][j];
+            }
         }
        int ulang=0;
        int panjangx = x.length;
-       /*for(i=0;i<panjangx;i++){
-             System.out.println("X["+i+"]= "+x[i]);
-       }
-        for (i = 0; i<(width); i++) {
-            for (j = 0; j < (height) ; j++) {
-                
-                        System.out.println("R:["+i+"]["+j+"]"+pixelRSAR[i][j]);
-                        
-                        System.out.println("G:["+i+"]["+j+"]"+pixelRSAG[i][j]);
-                        
-                        System.out.println("B:["+i+"]["+j+"]"+pixelRSAB[i][j]);
-                        
-                }
-        }*/
-        index = new int[panjangx];
-        for(i = 0;i<panjangx;i++){
-            if(x[i]==1){
-                index[i] = 7;
-            }
-            else if(x[i]==2){
-                index[i] = 6;
-            }
+     
+       index = new int[panjangx];
+       for(i = 0;i<panjangx;i++){
+           if(x[i]==1){
+              index[i] = 7;
+           }
+           else if(x[i]==2){
+              index[i] = 6;
+           }
         }
 //        for(int i = 0;i<index.length;i++){
 //            System.out.println("Index["+i+"]="+index[i]);

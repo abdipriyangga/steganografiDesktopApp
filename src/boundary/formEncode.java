@@ -12,6 +12,7 @@ import controllers.Encoder;
 import controllers.LSB;
 import controllers.RLSB;
 import controllers.PsnrManager;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -48,8 +49,9 @@ public class formEncode extends javax.swing.JFrame {
     String label_bits_embedded;
     String label_bits_extracted;
     String secret_message;
-    String cipherRSA_biner;
-    String cipherRSACRT_biner;
+    String binaryPesanAsli;
+//    String cipherRSA_biner;
+//    String cipherRSACRT_biner;
     BigInteger cipher_decimal;
     String binaryCipherAes;
     public formEncode() {
@@ -111,13 +113,13 @@ public class formEncode extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         lblNilaiA = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        nilaiA = new javax.swing.JTextField();
         lblNilaiC = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        nilaiC = new javax.swing.JTextField();
         lblNilaiM = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        nilaiM = new javax.swing.JTextField();
         lblNilaiX = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        nilaiX = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         btnEmbedRlsb = new javax.swing.JButton();
@@ -134,6 +136,7 @@ public class formEncode extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         lblPsnrRlsb = new javax.swing.JLabel();
         btnCalculateRlsb = new javax.swing.JButton();
+        warningLbl = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         lblHasilCoverImgLsb = new javax.swing.JLabel();
@@ -298,24 +301,24 @@ public class formEncode extends javax.swing.JFrame {
 
         lblNilaiA.setText("a:");
 
-        jTextField4.setText("281");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        nilaiA.setText("281");
+        nilaiA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                nilaiAActionPerformed(evt);
             }
         });
 
         lblNilaiC.setText("c:");
 
-        jTextField5.setText("2841");
+        nilaiC.setText("2841");
 
         lblNilaiM.setText("m:");
 
-        jTextField6.setText("134456");
+        nilaiM.setText("134456");
 
         lblNilaiX.setText("X0:");
 
-        jTextField7.setText("3");
+        nilaiX.setText("3");
 
         jLabel12.setText("Bit Embed : ");
 
@@ -328,7 +331,7 @@ public class formEncode extends javax.swing.JFrame {
             }
         });
 
-        jLabel13.setText("Stego Image AES RLSB");
+        jLabel13.setText("Stego Image AES+RLSB");
 
         btnSaveRlsb.setText("Save");
 
@@ -400,18 +403,17 @@ public class formEncode extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(108, 108, 108))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                         .addComponent(btnSaveRlsb, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))))
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(110, 110, 110))))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel13)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(lblHasilStegoRlsb, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSaveRlsb)
@@ -427,42 +429,47 @@ public class formEncode extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel14))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(152, 152, 152)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEmbedRlsb, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(22, 22, 22))))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGap(99, 99, 99)
-                                .addComponent(lblHasilBitEmbedRlsb, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(lblNilaiA)
                                 .addGap(3, 3, 3)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(nilaiA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblNilaiC)
                                 .addGap(4, 4, 4)
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnEmbedRlsb, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel7Layout.createSequentialGroup()
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblNilaiM)
-                                        .addGap(3, 3, 3)
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblNilaiX)
-                                        .addGap(2, 2, 2)
-                                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(jLabel12))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblBitEmbed, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(nilaiC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblNilaiM)
+                                .addGap(3, 3, 3)
+                                .addComponent(nilaiM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblNilaiX)
+                                .addGap(2, 2, 2)
+                                .addComponent(nilaiX, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(99, 99, 99)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblBitEmbed, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblHasilBitEmbedRlsb, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addComponent(warningLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45))))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -470,26 +477,28 @@ public class formEncode extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNilaiA)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nilaiA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNilaiC)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nilaiC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNilaiM)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nilaiM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNilaiX)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nilaiX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnEmbedRlsb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(lblBitEmbed, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblBitEmbed, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
                 .addGap(4, 4, 4)
+                .addComponent(warningLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblHasilBitEmbedRlsb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -504,7 +513,7 @@ public class formEncode extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(471, Short.MAX_VALUE))
+                .addGap(0, 482, Short.MAX_VALUE))
         );
 
         jLabel16.setText("Cover Image");
@@ -606,7 +615,7 @@ public class formEncode extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel20.setText("Stego Image AES LSB");
+        jLabel20.setText("Stego Image AES+LSB");
 
         btnSaveLsb.setText("Save");
         btnSaveLsb.addActionListener(new java.awt.event.ActionListener() {
@@ -752,7 +761,7 @@ public class formEncode extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(111, 111, 111)
                 .addComponent(lblHasilCoverImgRlsb, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -761,7 +770,7 @@ public class formEncode extends javax.swing.JFrame {
                         .addGap(129, 129, 129))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addGap(149, 149, 149))))
+                        .addGap(169, 169, 169))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -785,14 +794,14 @@ public class formEncode extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(titleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
@@ -802,8 +811,9 @@ public class formEncode extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addComponent(titleLbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtFieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -864,12 +874,160 @@ public class formEncode extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBrowseImgRlsbActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void nilaiAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nilaiAActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_nilaiAActionPerformed
 
     private void btnEmbedRlsbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmbedRlsbActionPerformed
         // TODO add your handling code here:
+        try{
+        int a = Integer.parseInt(nilaiA.getText());
+        int c = Integer.parseInt(nilaiC.getText());
+        int m = Integer.parseInt(nilaiM.getText());
+        int x0 = Integer.parseInt(nilaiX.getText());
+        RLSB random_lsb = new RLSB();
+        int[] x = new int[m];
+        x = random_lsb.LCG(a,c,m,x0);
+        
+        int panjangText = binaryPesanAsli.length();
+        System.out.println("binary pesan asli : " + binaryPesanAsli);
+        
+        char[] binPesanAsli = new char[panjangText];
+        for(int  i = 0; i < panjangText; i++) {
+            binPesanAsli[i] = binaryPesanAsli.charAt(i);
+            System.out.println("Sisipan index ke : " + binPesanAsli[i]);
+        }
+//        int panjangcipherRSA = cipherRSA_biner.length();
+//        int panjangcipherRSACRT = cipherRSACRT_biner.length();
+//        
+//        System.out.println("Chiper RSAbin = "+cipherRSA_biner);
+//        System.out.println("Chiper RSACRTbin = "+cipherRSACRT_biner);
+//        
+//        char[] cbinCipherRSA = new char[cipherRSA_biner.length()];
+//        for(int i = 0;i<cipherRSA_biner.length();i++){
+//            cbinCipherRSA[i] = cipherRSA_biner.charAt(i);
+//            System.out.println("RSA index ke-"+i+"= "+cbinCipherRSA[i]);
+//        }
+//        
+//        char[] cbinCipherRSACRT = new char[cipherRSACRT_biner.length()];
+//        for(int i = 0;i<cipherRSACRT_biner.length();i++){
+//            cbinCipherRSACRT[i] = cipherRSACRT_biner.charAt(i);
+//            System.out.println("RSACRT index ke-"+i+"= "+cbinCipherRSA[i]);
+//        }
+        /*for(int i = 0 ; i<m ; i++){
+            System.out.println("Nilai X ke-"+i+"="+x[i]);
+        }*/
+        
+        Encoder encoder = new Encoder();
+        encoder.setcipherRSA(binPesanAsli);
+//        encoder.setcipherRSACRT(cbinCipherRSACRT);
+        encoder.setCoverImage(cover_image);
+//        encoder.encode(panjangText, panjangText, x);
+//        encoder.encode(panjangcipherRSA,panjangcipherRSACRT,x);
+//        stego_image = encoder.getStegoImage();
+//        stego_imageCRT = encoder.getStegoImageCRT();
+//        
+     
+        icon = new ImageIcon(stego_image);
+        lblHasilStegoRlsb.setEnabled(true);
+        lblHasilStegoRlsb.setIcon(icon);
+        //iconCRT = new ImageIcon(stego_imageCRT);
+        
+//        labelStegoImageEncode.setEnabled(true);
+//        labelStegoImageEncode.setIcon(icon);
+//        
+//        labelStegoImageEncode_CRT.setEnabled(true);
+//        labelStegoImageEncode_CRT.setIcon(iconCRT);
+//                
+        btnSaveRlsb.setEnabled(true);
+        btnCalculateRlsb.setEnabled(true);
+//        buttonSaveStego1.setEnabled(true);
+//        buttonCalculate.setEnabled(true);
+//        rsa_panjangpesan.setText(Integer.toString(encoder.getPanjangcRSA()));
+//        rsacrt_panjangpesan.setText(Integer.toString(encoder.getPanjangcRSACRT()));
+//        embed_btn.setEnabled(false);
+//        embed_btn.setText("Encoded");
+        }
+        catch(Exception E){
+            warningLbl.setForeground(Color.red);
+            warningLbl.setText("Harap Masukkan nilai a,c,m & x0 yang benar!");
+        }
+    }                                         
+
+    private void button_enkripActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+//
+//        field_enRSA.setLineWrap(true);  
+//        field_enRSA.setWrapStyleWord(true);
+//        field_enRSACRT.setLineWrap(true);  
+//        field_enRSACRT.setWrapStyleWord(true);
+//        
+//        String pesan = field_pesan.getText();
+//        char ganti ='i';
+//        String modifiedpesan = pesan.substring(0,0) + ganti + pesan.substring(0+1);
+//        System.out.println("Modified = "+modifiedpesan);
+//        int pbit_kunci = Integer.parseInt(field_pbit.getText());
+//        RSA RSA = new RSA();
+//        try{
+//            
+//        BigInteger hasil_enkripRSA[] = RSA.enkripsi(pesan, pbit_kunci);
+//        BigInteger mod_enkripRSA[] = RSA.enkripsi2(modifiedpesan, pbit_kunci, hasil_enkripRSA[3], hasil_enkripRSA[4], hasil_enkripRSA[0]);
+//        ava1 = hasil_enkripRSA[1];
+//        ava2 = mod_enkripRSA[1];
+//        System.out.println("cipher biner ="+RSA.getBinerCipher());
+//            System.out.println("Cipher biner inggi = "+RSA.getBinerCipher2());
+//            String bincipRSA= RSA.getBinerCipher();
+//            String Sall="";
+//            String temp="";
+//            int indexer=0;
+//        for(int i = 0;i<bincipRSA.length();i++){
+//            if(indexer >= bincipRSA.length()){
+//                break;
+//            }
+//            do{
+//                temp += bincipRSA.charAt(indexer);
+//                indexer++;
+//            }while(indexer %16 != 0);
+//            System.out.println(temp);
+//            
+//            BigInteger value = new BigInteger(temp,2);
+//            temp="";
+//            String timpa = value.toString();
+//            Sall += timpa;
+//        }
+//        RSA_CRT RSA_CRT = new RSA_CRT();
+//        BigInteger hasil_enkripRSACRT[] = RSA_CRT.enkripsi(pesan, pbit_kunci, hasil_enkripRSA[3], hasil_enkripRSA[4], hasil_enkripRSA[0]);
+//        BigInteger mod_enkripRSACRT[] = RSA_CRT.enkripsi2(modifiedpesan, pbit_kunci, hasil_enkripRSA[3], hasil_enkripRSA[4], hasil_enkripRSA[0]);
+//        field_pbit.setEnabled(false);
+//        ava3 = hasil_enkripRSACRT[1];
+//        ava4 = mod_enkripRSACRT[1];
+//        System.out.println("cipher biner "+RSA_CRT.getBinerCipher());
+//            String bincipRSACRT= RSA_CRT.getBinerCipher();
+//            System.out.println("Sall = "+Sall);
+//        field_enRSA.setText("KP = "+ hasil_enkripRSA[0]+"\n n = "+ hasil_enkripRSA[2]+"\n\nPesan = "+ Sall);
+//        field_enRSACRT.setText("KP = "+ hasil_enkripRSACRT[0]+"\n n = "+ hasil_enkripRSACRT[2]+"\n\nPesan = "+ hasil_enkripRSACRT[1]);
+//        BigInteger private_key = hasil_enkripRSA[5];
+//        field_p.setText(hasil_enkripRSA[3].toString());
+//        field_q.setText(hasil_enkripRSA[4].toString());
+//        field_d.setText(hasil_enkripRSA[5].toString());
+//        field_enRSA.setForeground(Color.black);
+//        field_enRSACRT.setForeground(Color.black);
+//        
+//        cipherRSA_biner = RSA.getBinerCipher();
+//        cipherRSACRT_biner = RSA_CRT.getBinerCipher();
+//            System.out.println("cipher awal="+cipherRSA_biner); 
+//        field_dp.setText(RSA_CRT.getdP().toString());
+//        field_dq.setText(RSA_CRT.getdQ().toString());
+//        field_qinv.setText(RSA_CRT.getqInv().toString());
+//        }
+//        
+//        catch(Exception e){
+//            field_enRSA.setForeground(Color.red);
+//            field_enRSA.setText("Panjang bit Kunci tidak boleh lebih kecil dari 2 dan merupakan bilangan bulat");
+//            field_enRSACRT.setForeground(Color.red);
+//            field_enRSACRT.setText("Panjang bit Kunci tidak boleh lebih kecil dari 2 dan merupakan bilangan bulat");
+//        }
+        
     }//GEN-LAST:event_btnEmbedRlsbActionPerformed
 
     private void btnBrowseImgLsbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseImgLsbActionPerformed
@@ -1010,10 +1168,6 @@ public class formEncode extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel lblBitEmbed;
     private javax.swing.JLabel lblFilenameLsb;
     private javax.swing.JLabel lblFilenameRlsb;
@@ -1033,9 +1187,14 @@ public class formEncode extends javax.swing.JFrame {
     private javax.swing.JLabel lblPsnrRlsb;
     private javax.swing.JLabel lblSizeLsb;
     private javax.swing.JLabel lblSizeRlsb;
+    private javax.swing.JTextField nilaiA;
+    private javax.swing.JTextField nilaiC;
+    private javax.swing.JTextField nilaiM;
+    private javax.swing.JTextField nilaiX;
     private javax.swing.JLabel titleLbl;
     private javax.swing.JTextArea txtAhasilChiperAes;
     private javax.swing.JTextArea txtAmsg;
     private javax.swing.JPanel txtFieldPanel;
+    private javax.swing.JLabel warningLbl;
     // End of variables declaration//GEN-END:variables
 }

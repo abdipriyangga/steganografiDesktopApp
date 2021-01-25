@@ -96,4 +96,8 @@ public class IoManager {
         jumlah_bits = jumlah_char*8;
         return jumlah_bits;
     }
+    
+    public void setCoverImage(BufferedImage cover_image) {
+        this.coverimage = coverimage;
+    }
 }
