@@ -7,7 +7,7 @@
 package boundary;
 
 import controllers.IoManager;
-import controllers.Aes;
+import controllers.AES;
 import controllers.Encoder;
 import controllers.LSB;
 import controllers.RLSB;
@@ -99,6 +99,11 @@ public class formEncodeNew extends javax.swing.JFrame {
         txtAmsg = new javax.swing.JTextArea();
         btnBrowseText = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnEncrypt = new javax.swing.JButton();
+        txtFkey = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtAHasilEncrypt = new javax.swing.JTextArea();
         pnlRlsb = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         lblHasilImage = new javax.swing.JLabel();
@@ -160,21 +165,48 @@ public class formEncodeNew extends javax.swing.JFrame {
 
         jLabel1.setText("Messages");
 
+        btnEncrypt.setText("Encrypt");
+        btnEncrypt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEncryptActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Set Key ");
+
+        txtAHasilEncrypt.setColumns(20);
+        txtAHasilEncrypt.setRows(5);
+        jScrollPane2.setViewportView(txtAHasilEncrypt);
+
         javax.swing.GroupLayout pnlMsgLayout = new javax.swing.GroupLayout(pnlMsg);
         pnlMsg.setLayout(pnlMsgLayout);
         pnlMsgLayout.setHorizontalGroup(
             pnlMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMsgLayout.createSequentialGroup()
-                .addGap(128, 128, 128)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(pnlMsgLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(pnlMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMsgLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnBrowseText)))
+                    .addGroup(pnlMsgLayout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(jLabel1))
+                    .addGroup(pnlMsgLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlMsgLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(pnlMsgLayout.createSequentialGroup()
+                                .addComponent(txtFkey, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnEncrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(pnlMsgLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                            .addGroup(pnlMsgLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnBrowseText))))
+                    .addGroup(pnlMsgLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2)))
                 .addContainerGap())
         );
         pnlMsgLayout.setVerticalGroup(
@@ -183,9 +215,17 @@ public class formEncodeNew extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBrowseText)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFkey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEncrypt))
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -786,13 +826,8 @@ public class formEncodeNew extends javax.swing.JFrame {
 //        System.out.println("Chiper RSAbin = "+cipherRSA_biner);
 //        System.out.println("Chiper RSACRTbin = "+cipherRSACRT_biner);
         String sm = "";
-        char[] binPesanAsli = secret_message.toCharArray();
-        
-
         char[] msgBiner = secret_message.toCharArray();
         for(int i = 0; i < msgBiner.length;i++){
-//            cbinCipherRSA[i] = cipherRSA_biner.charAt(i);
-//            System.out.println("RSA index ke-"+i+"= "+cbinCipherRSA[i]);
             int tmp = (int) msgBiner[i];
             String tmpBinary = Integer.toBinaryString(tmp);
 //            System.out.println(msgBiner[i] + " = " + (int) msgBiner[i] );
@@ -800,31 +835,11 @@ public class formEncodeNew extends javax.swing.JFrame {
         }
         char[] smI = sm.toCharArray();
         int pjgBinPesanAsli = smI.length;
-//            System.out.println(smI);
-//        for(int i = 0; i < binPesanAsli.length;i++){
-//            binPesanAsli[i] = binaryPesanAsli.charAt(i);
-////            int pjgBinPesanAsli = binPesanAsli.length;
-//            System.out.println("Pesan index ke-"+i+"= " + binPesanAsli[i]);
-//        }
-//        for(int i = 0; i < msgBiner.length;i++){
-////            cbinCipherRSA[i] = cipherRSA_biner.charAt(i);
-////            System.out.println("RSA index ke-"+i+"= "+cbinCipherRSA[i]);
-//            int tmp = (int) msgBiner[i];
-//            String tmpBinary = Integer.toBinaryString(tmp);
-////            System.out.println(msgBiner[i] + " = " + (int) msgBiner[i] );
-////            System.out.println(tmpBinary);
-//            sm += String.format("%1$7s" , tmpBinary).replace(" ", "0");
-//        }
-        
-        /*for(int i = 0 ; i<m ; i++){
-            System.out.println("Nilai X ke-"+i+"="+x[i]);
-        }*/
-        
         Encoder encoder = new Encoder();
         encoder.setBinPesanAsli(smI);
         encoder.setCoverImage(cover_image);
         encoder.encodeRlsb(pjgBinPesanAsli, x);
-//        stego_image = encoder.getStegoImage();
+        stego_image = encoder.getStegoImage();
 
         icon = new ImageIcon(stego_image);
         
@@ -867,6 +882,34 @@ public class formEncodeNew extends javax.swing.JFrame {
         lblHasilPsnr.setText(String.format("%.5f", psnr.getPSNR()));
     }//GEN-LAST:event_btnCalculateRlsbActionPerformed
 
+    private void btnEncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncryptActionPerformed
+        // TODO add your handling code here:
+        
+        txtAHasilEncrypt.setLineWrap(true);  
+        txtAHasilEncrypt.setWrapStyleWord(true);
+        
+        String pesan = txtAmsg.getText();
+        String kunciEnkripsi = txtFkey.getText();
+//        System.out.println("Pesan Enkrip: " + pesan);
+//        System.out.println("Key Enkrip: " + kunciEnkripsi);
+        AES AES = new AES();
+        
+        try{
+            String pesanEnkripsi = AES.encryptAES(pesan, kunciEnkripsi);
+            
+            txtAHasilEncrypt.setText(pesanEnkripsi);
+//            System.out.println("PESAN ASLI : \n" + pesan);
+//            System.out.println("\nHASIL ENKRIPSI : \n" + pesanEnkripsi);
+//            System.out.println("\nHASIL DEKRIPSI : \n" + hasilDekripsi);                
+        }
+        catch(Exception e){
+//            field_enRSA.setForeground(Color.red);
+//            field_enRSA.setText("Panjang bit Kunci tidak boleh lebih kecil dari 2 dan merupakan bilangan bulat");
+//            field_enRSACRT.setForeground(Color.red);
+//            field_enRSACRT.setText("Panjang bit Kunci tidak boleh lebih kecil dari 2 dan merupakan bilangan bulat");
+        }
+    }//GEN-LAST:event_btnEncryptActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -908,6 +951,7 @@ public class formEncodeNew extends javax.swing.JFrame {
     private javax.swing.JButton btnBrowseText;
     private javax.swing.JButton btnCalculateRlsb;
     private javax.swing.JButton btnEmbedRlsb;
+    private javax.swing.JButton btnEncrypt;
     private javax.swing.JButton btnSaveStegoLsb;
     private javax.swing.JButton btnSaveStegoRlsb;
     private javax.swing.JLabel jLabel1;
@@ -917,10 +961,12 @@ public class formEncodeNew extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblFileName;
     private javax.swing.JLabel lblFileNameLsb;
     private javax.swing.JLabel lblFileSize;
@@ -947,7 +993,9 @@ public class formEncodeNew extends javax.swing.JFrame {
     private javax.swing.JPanel pnlRlsb;
     private javax.swing.JPanel pnlStegoImageRlsb;
     private javax.swing.JPanel pnlStegoImageRlsb1;
+    private javax.swing.JTextArea txtAHasilEncrypt;
     private javax.swing.JTextArea txtAmsg;
+    private javax.swing.JTextField txtFkey;
     private javax.swing.JTextField txtNilaiA;
     private javax.swing.JTextField txtNilaiC;
     private javax.swing.JTextField txtNilaiM;
