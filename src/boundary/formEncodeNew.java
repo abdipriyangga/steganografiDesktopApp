@@ -60,7 +60,7 @@ public class formEncodeNew extends javax.swing.JFrame {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(formEncode.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(formEncodeNew.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         initComponents();
@@ -636,7 +636,7 @@ public class formEncodeNew extends javax.swing.JFrame {
             try {
                 io.inputSecretMessage(file);
             } catch (IOException ex) {
-                Logger.getLogger(formEncode.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(formEncodeNew.class.getName()).log(Level.SEVERE, null, ex);
             }
             secret_message = io.getSecretMessage();
             txtAmsg.setLineWrap(true);
@@ -664,7 +664,7 @@ public class formEncodeNew extends javax.swing.JFrame {
             try {
                 io.inputCoverImage(file);
             } catch (IOException ex) {
-                Logger.getLogger(formEncode.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(formEncodeNew.class.getName()).log(Level.SEVERE, null, ex);
             }
             label_filename = io.getFileName();
             lblFileName.setText(label_filename);
@@ -690,7 +690,7 @@ public class formEncodeNew extends javax.swing.JFrame {
             try {
                 io.inputCoverImage(file);
             } catch (IOException ex) {
-                Logger.getLogger(formEncode.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(formEncodeNew.class.getName()).log(Level.SEVERE, null, ex);
             }
             label_filename = io.getFileName();
             lblFileNameLsb.setText(label_filename);
@@ -708,145 +708,104 @@ public class formEncodeNew extends javax.swing.JFrame {
 
     private void btnEmbedRlsbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmbedRlsbActionPerformed
         // TODO add your handling code here:
-//        Encoder enco = new Encoder();
-//        stego_image = enco.cloneImage(cover_image);
-//        int[][] cover = new int[stego_image.getHeight()][stego_image.getWidth()];
-//        for(int y = 0; y < cover.length; y++){
-//            for(int x = 0; x < cover[y].length; x++){
-//                cover[y][x] = stego_image.getRGB(x,y);
-//            }
-//        }
-//        try{
-//        int a = Integer.parseInt(txtNilaiA.getText());
-//        int c = Integer.parseInt(txtNilaiC.getText());
-//        int m = Integer.parseInt(txtNilaiM.getText());
-//        int x0 = Integer.parseInt(txtNilaiX.getText());
-//        String sm = "";
-////            System.out.println("nilai A = " + a);
-////            System.out.println("nilai c = " + c);
-////            System.out.println("nilai M = " + m);
-////            System.out.println("nilai X0 = " + x0);
-//        RLSB random_lsb = new RLSB();
-//        int[] count = new int[m];
-//        count = random_lsb.LCG(a,c,m,x0);
-////        int panjangcipherRSA = cipherRSA_biner.length();
-////        int panjangcipherRSACRT = cipherRSACRT_biner.length();
-//        int panjangMsg = secret_message.length();
-////        System.out.println("Chiper RSAbin = "+cipherRSA_biner);
-////        System.out.println("Chiper RSACRTbin = "+cipherRSACRT_biner);
-//          System.out.println("Secret Messages = " + secret_message);
-////        char[] cbinCipherRSA = new char[cipherRSA_biner.length()];
-//          
-//        //Convert to binary
-//        char[] msgBiner = secret_message.toCharArray();
-//        for(int i = 0; i < msgBiner.length;i++){
-////            cbinCipherRSA[i] = cipherRSA_biner.charAt(i);
-////            System.out.println("RSA index ke-"+i+"= "+cbinCipherRSA[i]);
-//            int tmp = (int) msgBiner[i];
-//            String tmpBinary = Integer.toBinaryString(tmp);
-////            System.out.println(msgBiner[i] + " = " + (int) msgBiner[i] );
-////            System.out.println(tmpBinary);
-//            sm += String.format("%1$7s" , tmpBinary).replace(" ", "0");
-//        }
-////            System.out.println(sm);
-//        int index = -1;
-//        int[] lcg = new int[m] ;
-//        lcg[0] = x0;
-//         
-//        for(int i = 1; i < m; i++) {
-//           lcg[i] = ((a * (lcg[i - 1])) + c) % m;
-////            System.out.println("index ke - " + i + " nilai - " + lcg[i]);
-//        }
-//            
-////            for(int i = 0; i<m ; i++){
-////                if(lcg[i]%2 == 0){
-////                    lcg[i] = 2;
-////                }
-////                else{
-////                    lcg[i] = 1;
-////                }
-////            }
-//        System.out.println(lcg);
-//     for(int y = 0; y < cover.length; y++) {
-//            for(int x = 0; x < cover[y].length; x++){
-//                int secretBinary = 0;
-//                if(++index < sm.length()) {
-//                    secretBinary = Integer.parseInt(sm.substring(index, index + 1)) ;
-//                }
-////                cover[y][x] = 2 * Math.floorDiv(cover[y][x] >> 24 & 0xFF, 2) + secretBinary;
-////                System.out.printf("%4s", cover[y][x]);
-////                System.out.println(secretBinary);
-//                Color pixel = new Color((2 * Math.floorDiv((cover[y][x] >> 16) & 0xFF, 2) + secretBinary), (cover[y][x] >> 8 & 0xff), cover[y][x] & 0xff);
-//                stego_image.setRGB(x, y, pixel.getRGB());
-//            }
-////            System.out.println();
-//        }   
-////        Encoder encoder = new Encoder();
-////        IoManager io = new IoManager();
-////        encoder.setcipherRSA(cbinCipherRSA);
-////        encoder.setcipherRSACRT(cbinCipherRSACRT);
-////        io.setCoverImage(cover_image);
-////        encoder.encode(panjangcipherRSA,panjangcipherRSACRT,x);
-////        stego_image = enco.getStegoImage();
-////        stego_imageCRT = encoder.getStegoImageCRT();
-////        
-////     
-//        icon = new ImageIcon(stego_image);
-////        iconCRT = new ImageIcon(stego_imageCRT);
-////        
-//        lblStegoImageRlsb.setEnabled(true);
-//        lblStegoImageRlsb.setIcon(icon);
-////        
-////        labelStegoImageEncode_CRT.setEnabled(true);
-////        labelStegoImageEncode_CRT.setIcon(iconCRT);
-////                
-//        btnSaveStegoRlsb.setEnabled(true);
-////        buttonSaveStego1.setEnabled(true);
-////        buttonCalculate.setEnabled(true);
-////        rsa_panjangpesan.setText(Integer.toString(encoder.getPanjangcRSA()));
-////        rsacrt_panjangpesan.setText(Integer.toString(encoder.getPanjangcRSACRT()));
-//        btnEmbedRlsb.setEnabled(false);
-//        btnEmbedRlsb.setText("Encoded");
-//        }
-//        catch(Exception E){
-////            warning_label.setForeground(Color.red);
-////            warning_label.setText("Harap Masukkan nilai a,c,m & x0 yang benar!");
-//        }
+        Encoder enco = new Encoder();
+        stego_image = enco.cloneImage(cover_image);
+        int[][] cover = new int[stego_image.getHeight()][stego_image.getWidth()];
+        for(int y = 0; y < cover.length; y++){
+            for(int x = 0; x < cover[y].length; x++){
+                cover[y][x] = stego_image.getRGB(x,y);
+            }
+        }
         try{
         int a = Integer.parseInt(txtNilaiA.getText());
         int c = Integer.parseInt(txtNilaiC.getText());
         int m = Integer.parseInt(txtNilaiM.getText());
         int x0 = Integer.parseInt(txtNilaiX.getText());
+        String sm = "";
+//            System.out.println("nilai A = " + a);
+//            System.out.println("nilai c = " + c);
+//            System.out.println("nilai M = " + m);
+//            System.out.println("nilai X0 = " + x0);
         RLSB random_lsb = new RLSB();
-        int[] x = new int[m];
-        x = random_lsb.LCG(a,c,m,x0);
+        int[] count = new int[m];
+        count = random_lsb.LCG(a,c,m,x0);
 //        int panjangcipherRSA = cipherRSA_biner.length();
 //        int panjangcipherRSACRT = cipherRSACRT_biner.length();
-        System.out.println("Secret Messages = " + secret_message);
+        int panjangMsg = secret_message.length();
 //        System.out.println("Chiper RSAbin = "+cipherRSA_biner);
 //        System.out.println("Chiper RSACRTbin = "+cipherRSACRT_biner);
-        String sm = "";
-        char[] msgBiner = secret_message.toCharArray();
+          System.out.println("Secret Messages = " + secret_message);
+//        char[] cbinCipherRSA = new char[cipherRSA_biner.length()];
+          
+        //Convert to binary
+        String secretMsg = txtAHasilEncrypt.getText();
+        char[] msgBiner = secretMsg.toCharArray();
         for(int i = 0; i < msgBiner.length;i++){
+//            cbinCipherRSA[i] = cipherRSA_biner.charAt(i);
+//            System.out.println("RSA index ke-"+i+"= "+cbinCipherRSA[i]);
             int tmp = (int) msgBiner[i];
             String tmpBinary = Integer.toBinaryString(tmp);
 //            System.out.println(msgBiner[i] + " = " + (int) msgBiner[i] );
+//            System.out.println(tmpBinary);
             sm += String.format("%1$7s" , tmpBinary).replace(" ", "0");
         }
-        char[] smI = sm.toCharArray();
-        int pjgBinPesanAsli = smI.length;
-        Encoder encoder = new Encoder();
-        encoder.setBinPesanAsli(smI);
-        encoder.setCoverImage(cover_image);
-        encoder.encodeRlsb(pjgBinPesanAsli, x);
-        stego_image = encoder.getStegoImage();
-
+//            System.out.println(sm);
+        int index = -1;
+        int[] lcg = new int[m] ;
+        lcg[0] = x0;
+         
+        for(int i = 1; i < m; i++) {
+           lcg[i] = ((a * (lcg[i - 1])) + c) % m;
+//            System.out.println("index ke - " + i + " nilai - " + lcg[i]);
+        }
+            
+//            for(int i = 0; i<m ; i++){
+//                if(lcg[i]%2 == 0){
+//                    lcg[i] = 2;
+//                }
+//                else{
+//                    lcg[i] = 1;
+//                }
+//            }
+        System.out.println(lcg);
+     for(int y = 0; y < cover.length; y++) {
+            for(int x = 0; x < cover[y].length; x++){
+                int secretBinary = 0;
+                if(++index < sm.length()) {
+                    secretBinary = Integer.parseInt(sm.substring(index, index + 1)) ;
+                }
+//                cover[y][x] = 2 * Math.floorDiv(cover[y][x] >> 24 & 0xFF, 2) + secretBinary;
+//                System.out.printf("%4s", cover[y][x]);
+//                System.out.println(secretBinary);
+                Color pixel = new Color((2 * Math.floorDiv((cover[y][x] >> 16) & 0xFF, 2) + secretBinary), (cover[y][x] >> 8 & 0xff), cover[y][x] & 0xff);
+                stego_image.setRGB(x, y, pixel.getRGB());
+            }
+//            System.out.println();
+        }   
+//        Encoder encoder = new Encoder();
+//        IoManager io = new IoManager();
+//        encoder.setcipherRSA(cbinCipherRSA);
+//        encoder.setcipherRSACRT(cbinCipherRSACRT);
+//        io.setCoverImage(cover_image);
+//        encoder.encode(panjangcipherRSA,panjangcipherRSACRT,x);
+//        stego_image = enco.getStegoImage();
+//        stego_imageCRT = encoder.getStegoImageCRT();
+//        
+//     
         icon = new ImageIcon(stego_image);
-        
+//        iconCRT = new ImageIcon(stego_imageCRT);
+//        
         lblStegoImageRlsb.setEnabled(true);
         lblStegoImageRlsb.setIcon(icon);
-        
+//        
+//        labelStegoImageEncode_CRT.setEnabled(true);
+//        labelStegoImageEncode_CRT.setIcon(iconCRT);
+//                
         btnSaveStegoRlsb.setEnabled(true);
+//        buttonSaveStego1.setEnabled(true);
+//        buttonCalculate.setEnabled(true);
+//        rsa_panjangpesan.setText(Integer.toString(encoder.getPanjangcRSA()));
+//        rsacrt_panjangpesan.setText(Integer.toString(encoder.getPanjangcRSACRT()));
         btnEmbedRlsb.setEnabled(false);
         btnEmbedRlsb.setText("Encoded");
         }
@@ -854,6 +813,48 @@ public class formEncodeNew extends javax.swing.JFrame {
 //            warning_label.setForeground(Color.red);
 //            warning_label.setText("Harap Masukkan nilai a,c,m & x0 yang benar!");
         }
+//        try{
+//        int a = Integer.parseInt(txtNilaiA.getText());
+//        int c = Integer.parseInt(txtNilaiC.getText());
+//        int m = Integer.parseInt(txtNilaiM.getText());
+//        int x0 = Integer.parseInt(txtNilaiX.getText());
+//        RLSB random_lsb = new RLSB();
+//        int[] x = new int[m];
+//        x = random_lsb.LCG(a,c,m,x0);
+////        int panjangcipherRSA = cipherRSA_biner.length();
+////        int panjangcipherRSACRT = cipherRSACRT_biner.length();
+//        System.out.println("Secret Messages = " + secret_message);
+////        System.out.println("Chiper RSAbin = "+cipherRSA_biner);
+////        System.out.println("Chiper RSACRTbin = "+cipherRSACRT_biner);
+//        String sm = "";
+//        char[] msgBiner = secret_message.toCharArray();
+//        for(int i = 0; i < msgBiner.length;i++){
+//            int tmp = (int) msgBiner[i];
+//            String tmpBinary = Integer.toBinaryString(tmp);
+////            System.out.println(msgBiner[i] + " = " + (int) msgBiner[i] );
+//            sm += String.format("%1$7s" , tmpBinary).replace(" ", "0");
+//        }
+//        char[] smI = sm.toCharArray();
+//        int pjgBinPesanAsli = smI.length;
+//        Encoder encoder = new Encoder();
+//        encoder.setBinPesanAsli(smI);
+//        encoder.setCoverImage(cover_image);
+//        encoder.encodeRlsb(pjgBinPesanAsli, x);
+//        stego_image = encoder.getStegoImage();
+//
+//        icon = new ImageIcon(stego_image);
+//        
+//        lblStegoImageRlsb.setEnabled(true);
+//        lblStegoImageRlsb.setIcon(icon);
+//        
+//        btnSaveStegoRlsb.setEnabled(true);
+//        btnEmbedRlsb.setEnabled(false);
+//        btnEmbedRlsb.setText("Encoded");
+//        }
+//        catch(Exception E){
+////            warning_label.setForeground(Color.red);
+////            warning_label.setText("Harap Masukkan nilai a,c,m & x0 yang benar!");
+//        }
     }//GEN-LAST:event_btnEmbedRlsbActionPerformed
 
     private void btnSaveStegoRlsbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveStegoRlsbActionPerformed
