@@ -27,9 +27,6 @@ public class Encoder {
     private String[][] SR;
     private String[][] SG;
     private String[][] SB;
-    private String[][] pixelAESR;
-    private String[][] pixelAESG;
-    private String[][] pixelAESB;
     private String[][] pixelRlsbR;
     private String[][] pixelRlsbG;
     private String[][] pixelRlsbB;

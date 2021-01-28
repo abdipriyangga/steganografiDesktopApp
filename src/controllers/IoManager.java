@@ -9,6 +9,8 @@ package controllers;
 import entity.ImageData;
 import entity.TextData;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -20,6 +22,7 @@ import javax.imageio.ImageIO;
  * @author mabdipme
  */
 public class IoManager {
+    BufferedImage cover_image, stego_image;
     ImageData coverimage, stegoimage;
     TextData secretmsg;
     String text;
@@ -97,7 +100,10 @@ public class IoManager {
         return jumlah_bits;
     }
     
-    public void setCoverImage(BufferedImage cover_image) {
-        this.coverimage = coverimage;
+public BufferedImage cloneImage(BufferedImage cover_image){
+        this.cover_image = cover_image;
+        ColorModel cm = cover_image.getColorModel();
+        WritableRaster raster = cover_image.copyData(null);
+        return new BufferedImage(cm, raster, cm.isAlphaPremultiplied(), null);
     }
 }
