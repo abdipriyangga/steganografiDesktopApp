@@ -4,12 +4,20 @@
  * and open the template in the editor.
  */
 
-package controllers;
+package entity;
 
 /**
  *
  * @author mabdipme
  */
-public class Decoder {
+public class TextData {
+    String text;
     
+    public void setText(String secret_message){
+        this.text = secret_message;
+    }
+    
+    public String getText(){
+        return text;
+    }
 }

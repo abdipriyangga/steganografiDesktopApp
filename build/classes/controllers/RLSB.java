@@ -10,6 +10,6 @@ package controllers;
  *
  * @author mabdipme
  */
-public class LSB {
-    
+public class RLSB {
+
 }
