@@ -9,10 +9,10 @@ public class MainController {
 
     MainEntity entity = new MainEntity();
     // BUAT LCG SEBANYAK NILAI M (CASE: 160 X 160)
-    int a  = 5001; //multiplier
-    int b  = 11213; //increment
-    int m  = 0; //modulus
-    int seed = 3; //seed
+    int a  = 5001; //multiplier 5001
+    int b  = 11213; //increment 11213
+    int m  = 0; //modulus 0 
+    int seed = 3; //seed 3
     public MainController() {
     }
     public BufferedImage doRLSB(BufferedImage stego_image, String secret_message){

@@ -14,6 +14,8 @@ import controllers.PsnrManager;
 import controllers.LCG;
 import controllers.MainController;
 import java.awt.Color;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -55,7 +57,7 @@ public class formDecode extends javax.swing.JFrame {
      * Creates new form formDecode
      */
     public formDecode() {
-        this.setTitle("Steganografi Random LSB + AES");
+        this.setTitle("Steganografi Random LSB + LSB");
         this.setResizable(false);
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -68,6 +70,10 @@ public class formDecode extends javax.swing.JFrame {
         startForm();
         io = new IoManager();
         initComponents();
+    }
+        public void close() {
+        WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
     }
 
       private void startForm(){
@@ -89,10 +95,10 @@ public class formDecode extends javax.swing.JFrame {
         lblNameStegoRlsb = new javax.swing.JLabel();
         lblSizeStegoRlsb = new javax.swing.JLabel();
         btnDecode = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtASmRlsb = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         btnBrowseStegoRlsb = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtASmRlsb = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         lblStegoLsb = new javax.swing.JLabel();
@@ -104,8 +110,9 @@ public class formDecode extends javax.swing.JFrame {
         txtASmLsb = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
         btnBrowseStegoLsb = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Form Decode");
@@ -124,10 +131,6 @@ public class formDecode extends javax.swing.JFrame {
             }
         });
 
-        txtASmRlsb.setColumns(20);
-        txtASmRlsb.setRows(5);
-        jScrollPane1.setViewportView(txtASmRlsb);
-
         jLabel2.setText("Secret Massage");
 
         btnBrowseStegoRlsb.setText("Browse ");
@@ -137,13 +140,18 @@ public class formDecode extends javax.swing.JFrame {
             }
         });
 
+        txtASmRlsb.setEditable(false);
+        txtASmRlsb.setColumns(20);
+        txtASmRlsb.setLineWrap(true);
+        txtASmRlsb.setRows(5);
+        jScrollPane1.setViewportView(txtASmRlsb);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,6 +177,10 @@ public class formDecode extends javax.swing.JFrame {
                                 .addComponent(lblStegoRlsb, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 92, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,8 +200,8 @@ public class formDecode extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -225,7 +237,6 @@ public class formDecode extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,8 +260,12 @@ public class formDecode extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(77, 77, 77)
                                 .addComponent(lblStegoLsb, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 68, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 55, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,9 +284,9 @@ public class formDecode extends javax.swing.JFrame {
                     .addComponent(btnBrowseStegoLsb))
                 .addGap(30, 30, 30)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -316,15 +331,31 @@ public class formDecode extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnClose.setText("Close");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(451, 451, 451)
+                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnClose)
+                .addGap(34, 34, 34))
         );
 
         pack();
@@ -361,13 +392,18 @@ public class formDecode extends javax.swing.JFrame {
 //        stego_image = io.cloneImage(cover_image);
         
         String secretMessage = controller.doRLSBDecode(cover_image);
-        
-        
+        secret_message = secretMessage;
+        txtASmRlsb.setLineWrap(true);
+        txtASmRlsb.setText(secret_message);
+        txtASmRlsb.setWrapStyleWord(true);
     }//GEN-LAST:event_btnDecodeActionPerformed
 
     private void btnDecodeLsbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDecodeLsbActionPerformed
         // TODO add your handling code here:
         String secretMessage = controller.doRLSBDecode(cover_image_lsb);
+        txtASmLsb.setLineWrap(true);
+        txtASmLsb.setText(secretMessage);
+        txtASmLsb.setWrapStyleWord(true);
     }//GEN-LAST:event_btnDecodeLsbActionPerformed
 
     private void btnBrowseStegoLsbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseStegoLsbActionPerformed
@@ -395,6 +431,11 @@ public class formDecode extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No file selected!");
         }
     }//GEN-LAST:event_btnBrowseStegoLsbActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        // TODO add your handling code here:\
+        close();
+    }//GEN-LAST:event_btnCloseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -434,6 +475,7 @@ public class formDecode extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBrowseStegoLsb;
     private javax.swing.JButton btnBrowseStegoRlsb;
+    private javax.swing.JButton btnClose;
     private javax.swing.JButton btnDecode;
     private javax.swing.JButton btnDecodeLsb;
     private javax.swing.JLabel jLabel1;

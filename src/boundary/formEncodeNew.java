@@ -6,14 +6,16 @@
 
 package boundary;
 
-import controllers.IoManager;
 import controllers.AES;
 import controllers.Encoder;
-import controllers.RLSB;
-import controllers.PsnrManager;
+import controllers.IoManager;
 import controllers.LCG;
 import controllers.MainController;
+import controllers.PsnrManager;
+import controllers.RLSB;
 import java.awt.Color;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -56,7 +58,7 @@ public class formEncodeNew extends javax.swing.JFrame {
     MainController controller = new MainController();
     
     public formEncodeNew() {
-        this.setTitle("Steganografi Random LSB + AES");
+        this.setTitle("Steganografi Random LSB dan LSB");
         this.setResizable(false);
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -68,8 +70,14 @@ public class formEncodeNew extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         startForm();
         io = new IoManager();
+        
     }
     private void startForm(){
+    }
+    
+    public void close() {
+        WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -138,11 +146,12 @@ public class formEncodeNew extends javax.swing.JFrame {
         lblHasilPsnrLsb = new javax.swing.JLabel();
         btnEmbedLsb = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblTitle.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lblTitle.setText("Form Encode");
 
+        txtAmsg.setEditable(false);
         txtAmsg.setColumns(20);
         txtAmsg.setRows(5);
         jScrollPane1.setViewportView(txtAmsg);
@@ -169,7 +178,17 @@ public class formEncodeNew extends javax.swing.JFrame {
         txtAHasilEncrypt.setRows(5);
         jScrollPane2.setViewportView(txtAHasilEncrypt);
 
-        btnGotoDecode.setText("Go to Decode");
+        btnGotoDecode.setText("Go Back to Main");
+        btnGotoDecode.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGotoDecodeMouseClicked(evt);
+            }
+        });
+        btnGotoDecode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGotoDecodeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlMsgLayout = new javax.swing.GroupLayout(pnlMsg);
         pnlMsg.setLayout(pnlMsgLayout);
@@ -647,7 +666,9 @@ public class formEncodeNew extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBg, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlBg, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 24, Short.MAX_VALUE))
         );
 
         pack();
@@ -739,7 +760,7 @@ public class formEncodeNew extends javax.swing.JFrame {
         BufferedImage cloneImage = io.cloneImage(cover_image);
         // DO STEGANOGRAPHY RLSB        
         stego_image = controller.doRLSB(cloneImage, secret_message);
-        
+         
         icon = new ImageIcon(stego_image);
         lblStegoImageRlsb.setEnabled(true);
         lblStegoImageRlsb.setIcon(icon);
@@ -796,63 +817,6 @@ public class formEncodeNew extends javax.swing.JFrame {
 
     private void btnEmbedLsbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmbedLsbActionPerformed
         // TODO add your handling code here:
-//        stego_image_lsb = io.cloneImage(cover_image_lsb);
-//        
-//        int panjang = stego_image_lsb.getHeight();
-//        int lebar   = stego_image_lsb.getWidth();
-//        
-//        int[][] cover = new int[panjang][lebar];
-//        for(int y = 0; y < cover.length; y++){
-//            for(int x = 0; x < cover[y].length; x++){
-//                cover[y][x] = stego_image_lsb.getRGB(x,y);
-//            }
-//        }
-//        try{
-//            String sm = "";
-//        
-//            int panjangMsg = secret_message.length();
-//
-//            System.out.println("Secret Messages = " + secret_message);
-//          
-//            //Convert to binary
-//            String secretMsg = secret_message;
-//            char[] msgBiner = secretMsg.toCharArray();
-//            
-//            for(int i = 0; i < msgBiner.length;i++){
-//                int tmp = (int) msgBiner[i];
-//                String tmpBinary = Integer.toBinaryString(tmp);
-//                sm += String.format("%1$7s" , tmpBinary).replace(" ", "0");
-//            }
-////            System.out.println(sm);
-//            int indexer = -1 ;
-//            for(int y = 0; y < cover.length; y++) {
-//                for(int x = 0; x < cover[y].length; x++){
-//                    int secretBinary = 0;
-//                    if(++indexer < sm.length()) {
-//                        secretBinary = Integer.parseInt(sm.substring(indexer, indexer + 1)) ;
-//                    }
-////                cover[y][x] = 2 * Math.floorDiv(cover[y][x] >> 24 & 0xFF, 2) + secretBinary;
-////                System.out.printf("%4s", cover[y][x]);
-////                System.out.println(secretBinary);
-//                    int red   = (2 * Math.floorDiv((cover[y][x] >> 16) & 0xFF, 2) + secretBinary);
-//                    int green = (cover[y][x] >> 8 & 0xff);
-//                    int blue  = (cover[y][x] & 0xff);
-//                    Color pixel = new Color(red, green, blue);
-//                    stego_image_lsb.setRGB(x, y, pixel.getRGB());
-//                }
-////            System.out.println();
-//            }      
-//            icon = new ImageIcon(stego_image_lsb);
-//            lblStegoImageLsb.setEnabled(true);
-//            lblStegoImageLsb.setIcon(icon);
-//            btnSaveStegoLsb.setEnabled(true);
-//            btnEmbedLsb.setEnabled(false);
-//            btnEmbedLsb.setText("LSB Encoded");
-//        }
-//        catch(Exception E){
-////            warning_label.setForeground(Color.red);
-////            warning_label.setText("Harap Masukkan nilai a,c,m & x0 yang benar!");
-//        }
         // CLONE IMAGE INPUT
         BufferedImage cloneImage = io.cloneImage(cover_image_lsb);
         // DO STEGANOGRAPHY RLSB        
@@ -891,6 +855,17 @@ public class formEncodeNew extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnSaveStegoLsbActionPerformed
+
+    private void btnGotoDecodeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGotoDecodeMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGotoDecodeMouseClicked
+
+    private void btnGotoDecodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGotoDecodeActionPerformed
+        // TODO add your handling code here:
+        close();
+        formMain fm = new formMain();
+        fm.setVisible(true);
+    }//GEN-LAST:event_btnGotoDecodeActionPerformed
 
     /**
      * @param args the command line arguments

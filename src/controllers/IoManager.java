@@ -90,6 +90,10 @@ public class IoManager {
         return text;
     }
     
+    public String getSecretMessageDecode(String sm){
+        text = secretmsg.getText();
+        return text;
+    }
     public int getJumlahChar(){
         jumlah_char = text.length() + 1;
         return jumlah_char;

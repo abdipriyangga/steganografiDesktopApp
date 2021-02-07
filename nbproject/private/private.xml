@@ -5,7 +5,9 @@
         <group>
             <file>file:/home/mabdipme/NetBeansProjects/finalProject/src/controllers/MainController.java</file>
             <file>file:/home/mabdipme/NetBeansProjects/finalProject/src/entity/MainEntity.java</file>
+            <file>file:/home/mabdipme/NetBeansProjects/finalProject/src/controllers/Encoder.java</file>
             <file>file:/home/mabdipme/NetBeansProjects/finalProject/src/boundary/formEncodeNew.java</file>
+            <file>file:/home/mabdipme/NetBeansProjects/finalProject/src/boundary/formMain.java</file>
             <file>file:/home/mabdipme/NetBeansProjects/finalProject/src/boundary/formDecode.java</file>
         </group>
     </open-files>

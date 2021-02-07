@@ -11,6 +11,8 @@ package boundary;
  * @author mabdipme
  */
 
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -30,6 +32,11 @@ public class formMain extends javax.swing.JFrame {
     public formMain() {
         initComponents();
     }
+    
+        public void close() {
+        WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,14 +54,14 @@ public class formMain extends javax.swing.JFrame {
         btnDecode = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel2.setText("Aplikasi Pengamanan Pesan Menggunakan");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setText("AES Dan RLSB");
+        jLabel1.setText("RLSB dan LSB");
 
         btnEncode.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnEncode.setText("Encode");
@@ -68,6 +75,11 @@ public class formMain extends javax.swing.JFrame {
         btnDecode.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnDecode.setText("Decode");
         btnDecode.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDecode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDecodeActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton1.setText("Exit");
@@ -130,11 +142,21 @@ public class formMain extends javax.swing.JFrame {
 
     private void btnEncodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncodeActionPerformed
         // TODO add your handling code here:
+        close();
+        formEncodeNew fen = new formEncodeNew();
+        fen.setVisible(true);
     }//GEN-LAST:event_btnEncodeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnDecodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDecodeActionPerformed
+        // TODO add your handling code here:
+        close();
+        formDecode fd = new formDecode();
+        fd.setVisible(true);
+    }//GEN-LAST:event_btnDecodeActionPerformed
 
     /**
      * @param args the command line arguments
