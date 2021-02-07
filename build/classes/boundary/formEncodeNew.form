@@ -229,38 +229,11 @@
                   <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="btnBrowseImage" min="-2" max="-2" attributes="0"/>
-                          </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="lblFileName" min="-2" pref="161" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="lblFileSize" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="lblNilaiA" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                      <Component id="txtNilaiA" min="-2" pref="40" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblNilaiC" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtNilaiC" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="lblNilaiM" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                      <Component id="txtNilaiM" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblNilaiX" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtNilaiX" min="-2" pref="31" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="btnEmbedRlsb" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="lblFileName" min="-2" pref="161" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="lblFileSize" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -274,6 +247,13 @@
                                   </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="btnEmbedRlsb" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="btnBrowseImage" alignment="1" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -295,17 +275,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnBrowseImage" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblNilaiA" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNilaiA" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNilaiC" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNilaiC" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNilaiM" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNilaiM" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNilaiX" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNilaiX" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnEmbedRlsb" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnEmbedRlsb" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pnlStegoImageRlsb" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -339,49 +309,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBrowseImageActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblNilaiA">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="a:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtNilaiA">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="281"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblNilaiC">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="c:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtNilaiC">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="2841"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblNilaiM">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="m:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtNilaiM">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="134456"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblNilaiX">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="x0:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtNilaiX">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="3"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNilaiXActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnEmbedRlsb">

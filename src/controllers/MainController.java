@@ -1,12 +1,10 @@
 package controllers;
 
 import entity.MainEntity;
-import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.util.Arrays;
 
 public class MainController {
-
+    
     MainEntity entity = new MainEntity();
     // BUAT LCG SEBANYAK NILAI M (CASE: 160 X 160)
     int a  = 5001; //multiplier 5001

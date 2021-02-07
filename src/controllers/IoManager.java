@@ -72,7 +72,7 @@ public class IoManager {
     public void saveStegoImage(String filename, BufferedImage image) throws IOException {
         this.image = image;
         file = new File(filename);
-        ImageIO.write(image,"png",file);
+        ImageIO.write(image,"bmp",file);
         stegoimage = new ImageData();
         stegoimage.setImage(image);
     }
