@@ -29,7 +29,6 @@ public class LCG {
         
         int[] listRandom = new int[m] ;
         listRandom[1] = x0;
-   
         try {
             for(z = 1; z < m; z++) {
                 listRandom[z] = ((a * (listRandom[z - 1])) + b) % m;
