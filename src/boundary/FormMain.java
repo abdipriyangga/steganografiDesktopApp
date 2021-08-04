@@ -61,10 +61,10 @@ public class FormMain extends javax.swing.JFrame {
         jLabel2.setText("Aplikasi Pengamanan Pesan Menggunakan");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setText("RLSB dan LSB");
+        jLabel1.setText("RLSB ");
 
         btnEmbed.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnEmbed.setText("Encode");
+        btnEmbed.setText("Embed");
         btnEmbed.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEmbed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,7 +73,7 @@ public class FormMain extends javax.swing.JFrame {
         });
 
         btnRetrive.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnRetrive.setText("Decode");
+        btnRetrive.setText("Retrieve");
         btnRetrive.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRetrive.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,14 +101,14 @@ public class FormMain extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(182, 182, 182))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(324, 324, 324))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgPanelLayout.createSequentialGroup()
                         .addGroup(bgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnEmbed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnRetrive, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                             .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(341, 341, 341))))
+                        .addGap(341, 341, 341))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(366, 366, 366))))
         );
         bgPanelLayout.setVerticalGroup(
             bgPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

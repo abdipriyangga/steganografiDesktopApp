@@ -7,7 +7,6 @@
 package boundary;
 
 import controllers.IoManager;
-import controllers.AES;
 import controllers.Encoder;
 import controllers.RLSB;
 import controllers.PsnrManager;
@@ -115,7 +114,7 @@ public class FormRetrive extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setText("Form Decode");
+        jLabel1.setText("Form Retrieve");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("Stego Image RLSB");
@@ -400,7 +399,7 @@ public class FormRetrive extends javax.swing.JFrame {
 
     private void btnRetriveLsbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetriveLsbActionPerformed
         // TODO add your handling code here:
-        String secretMessage = controller.doRLSBDecode(cover_image_lsb);
+        String secretMessage = controller.doLSBDecode(cover_image_lsb);
         txtASmLsb.setLineWrap(true);
         txtASmLsb.setText(secretMessage);
         txtASmLsb.setWrapStyleWord(true);

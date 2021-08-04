@@ -87,7 +87,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="18" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Form Decode"/>
+            <Property name="text" type="java.lang.String" value="Form Retrieve"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">

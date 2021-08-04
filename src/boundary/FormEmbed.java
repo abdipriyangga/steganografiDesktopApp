@@ -1,6 +1,5 @@
 package boundary;
 
-import controllers.AES;
 import controllers.IoManager;
 import controllers.LCG;
 import controllers.MainController;
@@ -25,9 +24,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class FormEmbed extends javax.swing.JFrame {
     IoManager io;
-    JFileChooser chooser;
+    JFileChooser chooser, chooserLsb;
     BufferedImage cover_image,cover_image_lsb, stego_image, stego_image_lsb;
-    FileNameExtensionFilter filter;
+    FileNameExtensionFilter filter, filterLsb;
     BufferedImage image;
     ImageIcon icon;
     File file;
@@ -78,11 +77,6 @@ public class FormEmbed extends javax.swing.JFrame {
         txtAmsg = new javax.swing.JTextArea();
         btnBrowseText = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        btnEncrypt = new javax.swing.JButton();
-        txtFkey = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtAHasilEncrypt = new javax.swing.JTextArea();
         btnGotoDecode = new javax.swing.JButton();
         pnlRlsb = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -124,7 +118,7 @@ public class FormEmbed extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblTitle.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        lblTitle.setText("Form Encode");
+        lblTitle.setText("Form Embed");
 
         txtAmsg.setEditable(false);
         txtAmsg.setColumns(20);
@@ -139,19 +133,6 @@ public class FormEmbed extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Messages");
-
-        btnEncrypt.setText("Encrypt");
-        btnEncrypt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEncryptActionPerformed(evt);
-            }
-        });
-
-        jLabel9.setText("Set Key ");
-
-        txtAHasilEncrypt.setColumns(20);
-        txtAHasilEncrypt.setRows(5);
-        jScrollPane2.setViewportView(txtAHasilEncrypt);
 
         btnGotoDecode.setText("Go Back to Main");
         btnGotoDecode.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -173,30 +154,16 @@ public class FormEmbed extends javax.swing.JFrame {
                 .addGroup(pnlMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlMsgLayout.createSequentialGroup()
                         .addGap(128, 128, 128)
-                        .addComponent(jLabel1))
-                    .addGroup(pnlMsgLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pnlMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlMsgLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(pnlMsgLayout.createSequentialGroup()
-                                .addComponent(txtFkey, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnEncrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnlMsgLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(pnlMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                             .addGroup(pnlMsgLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnBrowseText))))
-                    .addGroup(pnlMsgLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMsgLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnGotoDecode)))
+                                .addComponent(btnGotoDecode)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnBrowseText)))))
                 .addContainerGap())
         );
         pnlMsgLayout.setVerticalGroup(
@@ -207,17 +174,9 @@ public class FormEmbed extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBrowseText)
-                .addGap(33, 33, 33)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFkey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEncrypt))
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(btnGotoDecode)
+                    .addComponent(btnBrowseText)
+                    .addComponent(btnGotoDecode))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -721,26 +680,6 @@ public class FormEmbed extends javax.swing.JFrame {
         lblHasilPsnr.setText(String.format("%.5f", psnr.getPSNR()));
     }//GEN-LAST:event_btnCalculateRlsbActionPerformed
 
-    private void btnEncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncryptActionPerformed
-        // TODO add your handling code here:
-        
-        txtAHasilEncrypt.setLineWrap(true);  
-        txtAHasilEncrypt.setWrapStyleWord(true);
-        
-        String pesan = txtAmsg.getText();
-        String kunciEnkripsi = txtFkey.getText();
-        AES AES = new AES();
-        
-        try{
-            String pesanEnkripsi = AES.encryptAES(pesan, kunciEnkripsi);
-            
-            txtAHasilEncrypt.setText(pesanEnkripsi);              
-        }
-        catch(Exception e){
-            
-        }
-    }//GEN-LAST:event_btnEncryptActionPerformed
-
     private void btnEmbedLsbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmbedLsbActionPerformed
         // TODO add your handling code here:
         // CLONE IMAGE INPUT
@@ -766,12 +705,12 @@ public class FormEmbed extends javax.swing.JFrame {
 
     private void btnSaveStegoLsbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveStegoLsbActionPerformed
         // TODO add your handling code here:
-        chooser = new JFileChooser();
-        filter = new FileNameExtensionFilter("BMP Files","bmp");
-        chooser.setFileFilter(filter);
-        if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
+        chooserLsb = new JFileChooser();
+        filterLsb = new FileNameExtensionFilter("BMP Files","bmp");
+        chooserLsb.setFileFilter(filterLsb);
+        if (chooserLsb.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
             try{
-                io.saveStegoImage(chooser.getSelectedFile().getAbsolutePath() + ".bmp",stego_image_lsb);
+                io.saveStegoImage(chooserLsb.getSelectedFile().getAbsolutePath() + ".bmp",stego_image_lsb);
                 btnSaveStegoLsb.setEnabled(false);
                 btnSaveStegoLsb.setText("Saved");
                 
@@ -836,7 +775,6 @@ public class FormEmbed extends javax.swing.JFrame {
     private javax.swing.JButton btnCalculateRlsb;
     private javax.swing.JButton btnEmbedLsb;
     private javax.swing.JButton btnEmbedRlsb;
-    private javax.swing.JButton btnEncrypt;
     private javax.swing.JButton btnGotoDecode;
     private javax.swing.JButton btnSaveStegoLsb;
     private javax.swing.JButton btnSaveStegoRlsb;
@@ -847,12 +785,10 @@ public class FormEmbed extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblFileName;
     private javax.swing.JLabel lblFileNameLsb;
     private javax.swing.JLabel lblFileSize;
@@ -875,8 +811,6 @@ public class FormEmbed extends javax.swing.JFrame {
     private javax.swing.JPanel pnlRlsb;
     private javax.swing.JPanel pnlStegoImageRlsb;
     private javax.swing.JPanel pnlStegoImageRlsb1;
-    private javax.swing.JTextArea txtAHasilEncrypt;
     private javax.swing.JTextArea txtAmsg;
-    private javax.swing.JTextField txtFkey;
     // End of variables declaration//GEN-END:variables
 }
