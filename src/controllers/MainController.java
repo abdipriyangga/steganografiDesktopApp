@@ -6,9 +6,9 @@ import java.awt.image.BufferedImage;
 public class MainController {
     
     MainEntity entity = new MainEntity();
-    // BUAT LCG SEBANYAK NILAI M (CASE: 160 X 160)
-    int a  = 5001; //multiplier 5001
-    int b  = 11213; //increment 11213
+    // BUAT LCG SEBANYAK NILAI M (CASE: 250 X 250)
+    int a  = 30201; //multiplier 5001
+    int b  = 29573; //increment 11213
     int m  = 0; //modulus 0 
     int seed = 3; //seed 3
     public MainController() {
